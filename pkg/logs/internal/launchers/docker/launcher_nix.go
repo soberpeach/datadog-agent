@@ -14,6 +14,7 @@ import (
 
 	coreConfig "github.com/DataDog/datadog-agent/pkg/config"
 
+	"github.com/DataDog/datadog-agent/pkg/util/log"
 	"golang.org/x/sys/unix"
 )
 
@@ -30,7 +31,7 @@ func getDockerLogsPath() string {
 	if usePodmanLogs {
 		return podmanBasePath
 	} else if len(overridePath) > 0 {
-		fmt.Println("THE PATH IS: ", overridePath)
+		log.Info("THE PATH IS: %s", overridePath)
 		return overridePath
 	}
 
