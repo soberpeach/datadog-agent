@@ -52,9 +52,7 @@ func getPath(id string) string {
 
 	if coreConfig.Datadog.GetBool("logs_config.use_podman_logs") {
 		return filepath.Join(path, fmt.Sprintf("%s/userdata/ctr.log", id))
-	} else if len(coreConfig.Datadog.GetString("logs_config.docker_path_override")) > 0 {
-		return filepath.Join(path, id, fmt.Sprintf("%s-json.log", id))
-
 	}
+
 	return filepath.Join(path, id, fmt.Sprintf("%s-json.log", id))
 }

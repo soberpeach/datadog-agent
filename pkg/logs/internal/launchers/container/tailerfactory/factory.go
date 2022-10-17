@@ -18,6 +18,8 @@ import (
 	dockerutilPkg "github.com/DataDog/datadog-agent/pkg/util/docker"
 	"github.com/DataDog/datadog-agent/pkg/util/log"
 	"github.com/DataDog/datadog-agent/pkg/workloadmeta"
+
+	"runtime/debug"
 )
 
 // Factory supports making new tailers.
@@ -88,6 +90,7 @@ func (tf *factory) makeTailer(
 			return t, nil
 		}
 		log.Warnf("Could not make file tailer for source %s (falling back to socket): %v", source.Name, err)
+		debug.PrintStack()
 		return makeSocketTailer(source)
 
 	case false:
